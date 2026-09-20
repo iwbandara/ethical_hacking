@@ -1,0 +1,28 @@
+Nmap for Host Discovery & Network Scanning:
+-------------------------------------------
+
+-> Introduction to Nmap:
+------------------------
+
+    => Nmap (Network Mapper) is an open-source network discovery and security auditing tool used to identify:
+
+        -> Live hosts on a network
+        -> Open, closed, and filtered ports
+        -> Running network services
+        -> Service versions
+        -> Operating systems
+        -> Network configurations
+        -> Potential security weaknesses
+
+    => Nmap is widely used by:
+
+        -> Network administrators
+        -> Cybersecurity professionals
+        -> Penetration testers
+        -> Ethical hackers
+        -> Security researchers
+        -> System administrators
+
+    => The primary purpose of Nmap is network discovery and security assessment.
+
+*** Important: Nmap should only be used against systems and networks for which you have explicit authorization.
