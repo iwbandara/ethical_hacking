@@ -1,0 +1,11 @@
+-> Host Discovery:
+
+    => Host discovery determines which systems are reachable or appear to be active.
+
+    => Ping Scan:
+
+            nmap -sn 192.168.56.0/24
+
+        *** '-sn' performs host discovery without performing a port scan.
+
+        *** This is useful for creating an initial inventory of active systems.
