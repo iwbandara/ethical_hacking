@@ -1,0 +1,73 @@
+In ethical hacking, **TCP SYN scanning** and **TCP ACK scanning** are TCP-based techniques commonly used during network reconnaissance. They should only be performed on systems you are authorized to test.
+
+### 1. TCP SYN Scan
+
+A **TCP SYN scan** checks whether TCP ports are open without completing the full TCP connection. It is sometimes called a **half-open scan**.
+
+The basic process is:
+
+```text
+Scanner                    Target
+   | -------- SYN --------> |
+   | <------ SYN/ACK ------ |  Open port
+   | -------- RST --------> |
+
+   | -------- SYN --------> |
+   | <------- RST --------- |  Closed port
+```
+
+**Interpretation:**
+
+* **SYN/ACK received → Port is likely open**
+* **RST received → Port is closed**
+* **No response/ICMP error → Port may be filtered**
+
+**Example with Nmap:**
+
+```bash
+nmap -sS 192.168.1.10
+```
+
+The `-sS` option performs a TCP SYN scan.
+
+---
+
+### 2. TCP ACK Scan
+
+A **TCP ACK scan** sends TCP packets with the **ACK flag set**. Unlike a SYN scan, it is primarily used to determine whether ports are **filtered or unfiltered**, rather than whether they are open.
+
+```text
+Scanner                    Firewall/Target
+   | -------- ACK --------> |
+   | <------- RST ----------|  Unfiltered
+```
+
+**Interpretation:**
+
+* **RST received → Port is considered unfiltered**
+* **No response/ICMP error → Port is considered filtered**
+
+An important point is that an ACK scan **normally cannot distinguish an open port from a closed port**. Its main purpose is to investigate **firewall filtering behavior**.
+
+**Example with Nmap:**
+
+```bash
+nmap -sA 192.168.1.10
+```
+
+The `-sA` option performs a TCP ACK scan.
+
+### Key difference
+
+| Feature                      | **SYN Scan (`-sS`)**           | **ACK Scan (`-sA`)**            |
+| ---------------------------- | ------------------------------ | ------------------------------- |
+| TCP flag                     | SYN                            | ACK                             |
+| Main purpose                 | Identify likely **open ports** | Identify **firewall filtering** |
+| Full connection established? | No                             | No                              |
+| Open vs closed detection     | Yes, generally                 | No                              |
+| Useful for firewall analysis | Somewhat                       | **Yes**                         |
+
+**Easy way to remember:**
+
+> **SYN scan → "Is this port open?"**
+> **ACK scan → "Is this port being filtered?"**
