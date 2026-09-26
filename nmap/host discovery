@@ -15,3 +15,8 @@
 => Scan a specific port:          # nmap -p80 X.X.X.X
 
 => Scan for a set of ports:       # nmap -p80,443,21 X.X.X.X
+
+=> Scan using a script:           # nmap -p80 --script=<script_name> X.X.X.X/domain_name
+
+**** In Kali linux there are a collection of scripts that can be used. The location is /usr/share/nmap/scripts directory.
+
