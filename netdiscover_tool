@@ -1,0 +1,106 @@
+
+Use of Netdiscover Tool:
+------------------------
+
+-> What is netdiscover?
+
+    -> netdiscover is an ARP-based reconnaissance tool. 
+
+    -> It sends ARP requests to find live hosts on a local network segment and reports their IP addresses, MAC addresses, and hardware vendors. Because ARP works at Layer 2, it finds hosts even if they block ping (ICMP), but it only works on your local subnet.
+
+-> How to use:
+
+    # netdiscover
+
+    *** With no options it auto-scans common private ranges, which can be slow and noisy. It's better to be specific.
+
+-> Common options:
+
+    Option	            Purpose
+    ------              --------
+
+    -i eth0	            Specify the network interface
+
+    -r 192.168.1.0/24   Scan a specific range
+
+    -p	                Passive mode (only listens, sends nothing)
+
+    -P	                Print output in a parseable format and exit when done (good for scripts)
+
+    -l file.txt	        Scan the ranges listed in a file
+
+    -f	                Fast mode (less accurate but quicker)
+
+    -c 3	            Number of ARP requests per host (default 1)
+
+    -s 10	            Sleep time in ms between requests
+
+    -L	                Like -P, but keeps scanning after the list ends
+
+    -N	                Don't print the header lines (use with -P)
+
+    -S	                Enable sleep-time suppression between each request
+
+-> Practical examples
+
+    -> Active scan of your subnet:
+    
+        sudo netdiscover -i eth0 -r 192.168.1.0/24
+
+    -> Quick one-shot scan with clean output (no interactive screen):
+
+        sudo netdiscover -i eth0 -r 192.168.1.0/24 -P
+
+    -> Scan and save results to a file:
+
+        sudo netdiscover -i eth0 -r 192.168.1.0/24 -P -N > hosts.txt
+
+    -> Scan a list of devices from a file:
+
+        sudo netdiscover -l hosts.txt
+
+    -> Passive mode (stealthier, just listens for ARP traffic):
+
+        sudo netdiscover -i eth0 -p
+
+        *** Passive mode sends no packets, so it's harder to detect, but it takes longer because it waits for hosts to broadcast on their own.
+
+    -> More reliable scan (send multiple requests):
+
+        sudo netdiscover -i eth0 -r 192.168.1.0/24 -c 3
+
+    -> Scan a smaller range (faster):
+
+        sudo netdiscover -r 192.168.1.0/28
+
+-> Tips and limitations:
+
+    => Local network only: ARP doesn't cross routers, so you can't discover hosts on other subnets this way.
+
+    => Wireless: Make sure your interface is up and connected to the network. Monitor mode isn't needed.
+
+    => VMs: If Kali is in a VM, set the network adapter to Bridged mode (not NAT) so it sits on the same segment as the real devices.
+
+    => Detectability: Active scans generate ARP broadcast traffic that IDS tools or switches with dynamic ARP inspection can notice. Passive mode avoids this.
+
+    => Missed hosts: Some devices sleep or drop ARP requests. Use -c to send more requests, or rescan a few times.
+
+-> Follow-up steps:
+
+    => Once you have a list of live hosts, the natural next step is to scan them with nmap to identify open ports and services:
+
+-> Quick practice exercise:
+
+    1. Run ip add and note your subnet.
+
+    2. Run sudo netdiscover -i eth0 -r <your-subnet> -P.
+
+    3. Identify each device by its MAC vendor. Do you recognize all of them?
+
+    4. Try passive mode (-p) while opening a website on your phone, and watch how the device appears.
+
+Video Links:
+------------
+
+https://www.youtube.com/watch?v=8zP7A07x3tg
+
