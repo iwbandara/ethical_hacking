@@ -1,0 +1,73 @@
+hping3 for Network Discovery:
+-----------------------------
+
+-> hping3 is a command-line network testing and packet-crafting tool. In network discovery, it can be used to determine whether a host is reachable and to examine how the target responds to different types of network packets.
+
+-> Unlike `ping`, which mainly uses ICMP, hping3 can generate TCP, UDP, ICMP, and other IP packets.
+
+1. Basic ICMP discovery:
+
+    -> For an authorized target:
+
+        # sudo hping3 --icmp -c 4 192.168.10.100    
+    
+        *** This sends four ICMP packets and displays the responses. If responses are received, the host is likely reachable.
+
+2. TCP-based host discovery:
+
+    -> Sometimes ICMP is blocked by a firewall. A tester can therefore use TCP packets to check whether a host responds:
+
+        # sudo hping3 -S -p 80 -c 3 192.168.10.100
+
+        Here:
+
+        * `-S` → TCP SYN flag
+        * `-p 80` → destination port 80
+        * `-c 3` → send three packets
+
+    -> A SYN/ACK response can indicate that TCP port 80 is open, while a RST can indicate that the host is reachable but the port is closed.
+
+3. UDP-based discovery
+
+    -> hping3 can also generate UDP packets:
+
+
+        # sudo hping3 --udp -p 53 -c 3 192.168.10.100
+
+    -> This can be useful when investigating services such as DNS that commonly use UDP.
+
+4. Why use hping3 instead of ping?
+
+    | `ping`                       | `hping3`                                   |
+    | ---------------------------- | ------------------------------------------ |
+    | Mainly ICMP                  | ICMP, TCP, UDP and other packet types      |
+    | Simple connectivity testing  | More detailed packet-level testing         |
+    | Limited packet customization | Highly customizable packets                |
+    | Easy to use                  | More suitable for security/network testing |
+    -----------------------------------------------------------------------------
+
+-> Network-discovery workflow
+
+    Identify target range
+           ↓
+    Test ICMP connectivity
+           ↓
+    If ICMP blocked
+           ↓
+    Try authorized TCP/UDP probes
+           ↓
+    Analyze responses
+           ↓
+    Identify reachable hosts/services
+
+
+*** Important point:
+
+    => hping3 is not primarily a network scanner like Nmap. It is better viewed as a packet-generation and network-testing tool that can support discovery and help investigate how hosts and network security devices respond to different packets.
+
+-> For your ethical-hacking labs, a useful comparison is:
+
+    *** Nmap = automated network discovery and scanning
+    *** hping3 = customized packet generation and response analysis
+
+-> Only use hping3 against systems you are authorized to test, since customized packet generation can place significant load on network devices or trigger IDS/IPS alerts.
