@@ -46,6 +46,26 @@ hping3 for Network Discovery:
     | Easy to use                  | More suitable for security/network testing |
     -----------------------------------------------------------------------------
 
+-> Important hping3 Options:
+
+    Option	Purpose
+    ------  -------  
+    -1	    ICMP mode
+    -2	    UDP mode
+    -S	    TCP SYN flag
+    -A	    TCP ACK flag
+    -F	    TCP FIN flag
+    -R	    TCP RST flag
+    -p	    Destination port
+    -s	    Source port
+    -c	    Number of packets
+    -i	    Interval between packets
+    -t	    Set TTL
+    -d	    Packet data size
+    -V	    Verbose output
+    -T	    Traceroute mode
+    -h	    Help
+
 -> Network-discovery workflow
 
     Identify target range
