@@ -1,4 +1,20 @@
+What is Ethical Hacking?
+------------------------
+
 => Ethical hacking is the authorized practice of identifying, analyzing, and exploiting security vulnerabilities in computer systems, networks, applications, or other digital assets to improve their security.
 
 => A widely cited definition is from EC-Council:
   “Ethical hacking is the process of detecting vulnerabilities in an application, system, or organization's infrastructure that an attacker can use to exploit an individual or organization.”
+
+=> CEH Ethical Hacking Framework consists of FIVE phases:
+
+    1. Reconnaissance:
+        -> Gathering preliminary data or intelligence about the target to identify potential vulnerabilities.
+    2. Scanning:
+        -> Actively probing the target to discover open ports, services, and potential points of entry.
+    3. Gaining Access:
+        -> Exploiting identified vulnerabilities to infiltrate the target system.
+    4. Maintaining Access:
+        -> Ensuring persistent access to the target system for future exploitation or data extraction.
+    5. Covering Tracks:
+        -> Erasing evidence of the intrusion to avoid detection and maintain control.
