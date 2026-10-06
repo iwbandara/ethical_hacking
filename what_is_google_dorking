@@ -1,0 +1,51 @@
+What is Google Dorking?
+-----------------------
+
+**Google Dorking**, also called **Google Hacking**, is an **OSINT technique that uses advanced Google search operators to locate specific information that may be difficult to find through normal searches**.
+
+It does not involve hacking Google's systems. Instead, it makes use of Google's **search indexing and search operators** to narrow down publicly accessible information.
+
+### Common Google Dork operators
+
+| Operator    | Purpose                                 | Example                          |
+| ----------- | --------------------------------------- | -------------------------------- |
+| `site:`     | Search within a specific website/domain | `site:example.com cybersecurity` |
+| `filetype:` | Find specific file types                | `filetype:pdf network security`  |
+| `intitle:`  | Search for words in page titles         | `intitle:"network security"`     |
+| `inurl:`    | Search for words in URLs                | `inurl:login`                    |
+| `"`         | Search for an exact phrase              | `"information security policy"`  |
+| `-`         | Exclude a term                          | `network security -jobs`         |
+
+Example:
+
+  Suppose an ethical hacker is performing an **authorized OSINT assessment** of an organization's public website:
+
+    site:example.com filetype:pdf
+
+  This asks Google to return indexed PDF documents from `example.com`.
+
+Another example:
+
+    site:example.com inurl:login
+
+  This searches Google's index for pages on the organization's domain whose URL contains `login`.
+
+Why is it useful in cybersecurity?
+
+During an authorized security assessment, Google Dorking can help identify:
+
+* Publicly indexed documents
+* Information accidentally exposed on websites
+* Technology-related information
+* Public login portals
+* Old or forgotten web pages
+* Organizational information useful for reconnaissance
+
+### Important security point
+
+Google Dorking **does not mean that the information is necessarily vulnerable**. Google is generally only revealing information that it has indexed and that may already be publicly accessible.
+
+For ethical hacking, it should be performed **only against systems and organizations for which you have permission to conduct reconnaissance**.
+
+> **Simple definition:**
+> **Google Dorking is the use of advanced Google search operators to discover specific publicly indexed information for OSINT and security reconnaissance.**
